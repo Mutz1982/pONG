@@ -8,8 +8,10 @@ import java.awt.event.KeyListener;
 
 public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	
+	private static Color BACKGROUND_COLOUR = Color.BLACK; 
+	
 	public PongPanel() {
-		setBackground(Color.BLACK);
+		setBackground(BACKGROUND_COLOUR);
 	}
 
 	@Override
