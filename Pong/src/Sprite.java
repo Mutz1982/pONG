@@ -7,6 +7,7 @@ public class Sprite {
 	private int xVelocity, yVelocity;
 	private int width, height;
 	private int initialXPosition, initialYPosition;
+	Color BALL_COLOUR = Color.WHITE;
 	
 	public int getXPosition() {return xPosition;}
 	public int getYPosition() {return yPosition;}
@@ -83,7 +84,7 @@ public class Sprite {
 	}
 	public Color getColour() {
 		// TODO Auto-generated method stub
-		return null;
+		return BALL_COLOUR;
 	}
 	
 }
