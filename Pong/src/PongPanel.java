@@ -25,6 +25,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 		setBackground(BACKGROUND_COLOUR);
 		Timer timer = new Timer(TIMER_DELAY, this);
 		timer.start();
+		addKeyListener(this);
+		setFocusable(true);
 	}
 	
 	public void createObjects() {
@@ -43,6 +45,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 				break;
 			}
 			case Playing: {
+				moveObject(paddle1);	//	Move paddle one
+				moveObject(paddle2);	//	Move paddle two
 				moveObject(ball);		//	Move the ball
 				checkWallBounce();		//	Check for wall bounce
 				break;
@@ -88,13 +92,29 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent event) {
 		// TODO Auto-generated method stub
+		if(event.getKeyCode() == KeyEvent.VK_W) {
+			paddle1.setYVelocity(-1);
+		} else if(event.getKeyCode() == KeyEvent.VK_S) {
+			paddle1.setYVelocity(1);
+		}
 		
+		
+		if(event.getKeyCode() == KeyEvent.VK_UP) {
+			paddle2.setYVelocity(-1);
+		} else if(event.getKeyCode() == KeyEvent.VK_DOWN) {
+			paddle2.setYVelocity(1);
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent event) {
 		// TODO Auto-generated method stub
-		
+		if(event.getKeyCode() == KeyEvent.VK_W || event.getKeyCode() == KeyEvent.VK_S) {
+			paddle1.setYVelocity(0);
+		}
+		if(event.getKeyCode() == KeyEvent.VK_UP || event.getKeyCode() == KeyEvent.VK_DOWN) {
+			paddle2.setYVelocity(0);
+		}
 	}
 
 	@Override
