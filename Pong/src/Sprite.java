@@ -7,7 +7,7 @@ public class Sprite {
 	private int xVelocity, yVelocity;
 	private int width, height;
 	private int initialXPosition, initialYPosition;
-	Color BALL_COLOUR = Color.WHITE;
+	Color BALL_COLOUR = Color.BLACK;
 	
 	public int getXPosition() {return xPosition;}
 	public int getYPosition() {return yPosition;}
