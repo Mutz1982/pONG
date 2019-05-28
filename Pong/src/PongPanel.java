@@ -15,9 +15,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	
 	private final static Color BACKGROUND_COLOUR = Color.BLACK;
 	private final static int TIMER_DELAY = 5;
-	private Ball ball;
-	private Paddle paddle1;
-	private Paddle paddle2;
+	Ball ball;
+	Paddle paddle1, paddle2;
 	//boolean gameInitialised = false;
 	GameState gameState = GameState.Initialising;
 	
@@ -35,17 +34,17 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	
 	private void update() {
 		switch(gameState) {
-		case Initialising: {
-			createObjects();
-			gameState = GameState.Playing;
-			break;
-		}
-		case Playing: {
-			break;
-		}
-		case GameOver: {
-			break;
-		}
+			case Initialising: {
+				createObjects();
+				gameState = GameState.Playing;
+				break;
+			}
+			case Playing: {
+				break;
+			}
+			case GameOver: {
+				break;
+			}
 		}
 		
 		/***if(!gameInitialised) {
