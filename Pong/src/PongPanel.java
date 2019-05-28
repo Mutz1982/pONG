@@ -19,6 +19,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	Paddle paddle1, paddle2;
 	//boolean gameInitialised = false;
 	GameState gameState = GameState.Initialising;
+	private final static int BALL_MOVEMENT_SPEED = 2;
 	
 	public PongPanel() {
 		setBackground(BACKGROUND_COLOUR);
@@ -37,9 +38,13 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 			case Initialising: {
 				createObjects();
 				gameState = GameState.Playing;
+				ball.setXVelocity(BALL_MOVEMENT_SPEED);
+				ball.setYVelocity(BALL_MOVEMENT_SPEED);
 				break;
 			}
 			case Playing: {
+				moveObject(ball);		//	Move the ball
+				checkWallBounce();		//	Check for wall bounce
 				break;
 			}
 			case GameOver: {
@@ -105,6 +110,25 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 		repaint();
 	}
 
+	private void moveObject(Sprite object) {
+		object.setXPosition(object.getXPosition() + object.getXVelocity(), getWidth());
+		object.setYPosition(object.getYPosition() + object.getYVelocity(), getHeight());
+	}
+	
+	private void checkWallBounce() {
+		if(ball.getXPosition() <= 0) {			// Hit left side of screen
+			ball.setXVelocity(-ball.getXVelocity());		
+		} else if(ball.getXPosition() >= getWidth() - ball.getWidth()) {		// Hit right side of screen
+			ball.setXVelocity(-ball.getXVelocity());
+		}
+		
+		if(ball.getYPosition() <= 0 || ball.getYPosition() >= getHeight() - ball.getHeight()) {		// Hit top or bottom of screen
+			ball.setYVelocity(-ball.getYVelocity());
+		}
+		
+		
+	}
+	
 	
 	
 }
