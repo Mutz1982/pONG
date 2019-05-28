@@ -28,6 +28,11 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	private final static int SCORE_TEXT_Y = 100;
 	private final static int SCORE_FONT_SIZE = 50;
 	private final static String SCORE_FONT_FAMILY = "Serif";
+	private final static int WIN_TEXT_X = 200;
+	private final static int WIN_TEXT_Y = 200;
+	private final static int WIN_FONT_SIZE = 50;
+	private final static String WIN_FONT_FAMILY = "Serif";
+	private final static String WINNER_TEXT = "Winner!";
 	
 	public PongPanel() {
 		setBackground(BACKGROUND_COLOUR);
@@ -83,6 +88,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 			paintSprite(g, paddle1);
 			paintSprite(g, paddle2);
 			paintScores(g);
+			paintWinner(g);
 		}
 	}
 
@@ -196,11 +202,36 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	
 	private void paintScores(Graphics g) {
 		Font scoreFont = new Font(SCORE_FONT_FAMILY, Font.BOLD, SCORE_FONT_SIZE);
-		String leftScore = Integer.toString(player1Score);
-		String rightScore = Integer.toString(player2Score);
+		String leftScore = Integer.toString(player1Score);		// Convert Integer scores to string
+		String rightScore = Integer.toString(player2Score);	
 		g.setFont(scoreFont);
-		g.drawString(leftScore, SCORE_TEXT_X, SCORE_TEXT_Y);
-		g.drawString(rightScore, getWidth()-SCORE_TEXT_X, SCORE_TEXT_Y);
+		g.drawString(leftScore, SCORE_TEXT_X, SCORE_TEXT_Y);	// Draw Player ones score
+		g.drawString(rightScore, getWidth()-SCORE_TEXT_X, SCORE_TEXT_Y);	// Draw Player twos score
 	}
 	
+	public void paintWinner(Graphics g) {
+		Font winfont = new Font(WIN_FONT_FAMILY, Font.BOLD, WIN_FONT_SIZE);
+		g.setFont(winfont);
+		if(gameWinner == Player.One) {
+			g.drawString(WINNER_TEXT, WIN_TEXT_X, WIN_TEXT_Y);
+		} else if(gameWinner == Player.Two) {
+			g.drawString(WINNER_TEXT, getWidth()-WIN_TEXT_X, WIN_TEXT_Y);
+		}
+		
+		/***
+		 * if(gameWinner != null){
+		 * Font winnerFont = new Font(WINNER_FONT_FAMILY, Font.BOLD, WINNER_FONT_SIZE);
+		 * g.setFont(winnerFont);
+		 * int xPosition = getWidth() / 2;
+		 * if(gameWinner == Player.One) {
+		 * xPosition -= WINNER_TEXT_X;
+		 * } else if(gameWinner == Player.Two){
+		 * xPosition += WINNER_TEXT_X;
+		 * }
+		 * g.drawString(WINNER_TEXT, xPosition, WINNER_TEXT_Y);
+		 * }
+		 * }
+		 */
+		
+	}
 }
