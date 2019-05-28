@@ -2,6 +2,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -20,6 +21,13 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	//boolean gameInitialised = false;
 	GameState gameState = GameState.Initialising;
 	private final static int BALL_MOVEMENT_SPEED = 3;
+	private final static int POINTS_TO_WIN = 3;
+	int player1Score = 0, player2Score = 0;
+	Player gameWinner;
+	private final static int SCORE_TEXT_X = 100;
+	private final static int SCORE_TEXT_Y = 100;
+	private final static int SCORE_FONT_SIZE = 50;
+	private final static String SCORE_FONT_FAMILY = "Serif";
 	
 	public PongPanel() {
 		setBackground(BACKGROUND_COLOUR);
@@ -50,6 +58,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 				moveObject(ball);		//	Move the ball
 				checkWallBounce();		//	Check for wall bounce
 				checkPaddleBounce();	//	Check for paddle bounce
+				checkWin();				//	Check for win
 				break;
 			}
 			case GameOver: {
@@ -73,6 +82,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 			paintSprite(g, ball);
 			paintSprite(g, paddle1);
 			paintSprite(g, paddle2);
+			paintScores(g);
 		}
 	}
 
@@ -139,9 +149,11 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	private void checkWallBounce() {
 		if(ball.getXPosition() <= 0) {			// Hit left side of screen
 			ball.setXVelocity(-ball.getXVelocity());
+			addScore(Player.Two);				// Increase Player Twos score
 			resetBall();
 		} else if(ball.getXPosition() >= getWidth() - ball.getWidth()) {		// Hit right side of screen
 			ball.setXVelocity(-ball.getXVelocity());
+			addScore(Player.One);				// Increase Player Ones score
 			resetBall();
 		}
 		
@@ -163,5 +175,32 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 		}
 	}
 	
+	public void addScore(Player player) {
+		if(player == Player.One) {
+			player1Score++;
+		} else if(player == Player.Two) {
+			player2Score++;
+		}
+	}
+	
+	public void checkWin() {
+		if(player1Score == POINTS_TO_WIN) {
+			gameWinner = Player.One;
+			gameState = GameState.GameOver;
+		}
+		if(player2Score == POINTS_TO_WIN) {
+			gameWinner = Player.Two;
+			gameState = GameState.GameOver;
+		}
+	}
+	
+	private void paintScores(Graphics g) {
+		Font scoreFont = new Font(SCORE_FONT_FAMILY, Font.BOLD, SCORE_FONT_SIZE);
+		String leftScore = Integer.toString(player1Score);
+		String rightScore = Integer.toString(player2Score);
+		g.setFont(scoreFont);
+		g.drawString(leftScore, SCORE_TEXT_X, SCORE_TEXT_Y);
+		g.drawString(rightScore, getWidth()-SCORE_TEXT_X, SCORE_TEXT_Y);
+	}
 	
 }
