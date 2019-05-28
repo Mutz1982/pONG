@@ -117,18 +117,21 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	
 	private void checkWallBounce() {
 		if(ball.getXPosition() <= 0) {			// Hit left side of screen
-			ball.setXVelocity(-ball.getXVelocity());		
+			//ball.setXVelocity(-ball.getXVelocity());
+			resetBall();
 		} else if(ball.getXPosition() >= getWidth() - ball.getWidth()) {		// Hit right side of screen
-			ball.setXVelocity(-ball.getXVelocity());
+			//ball.setXVelocity(-ball.getXVelocity());
+			resetBall();
 		}
 		
 		if(ball.getYPosition() <= 0 || ball.getYPosition() >= getHeight() - ball.getHeight()) {		// Hit top or bottom of screen
 			ball.setYVelocity(-ball.getYVelocity());
 		}
-		
-		
 	}
 	
+	public void resetBall() {
+		ball.resetToInitialPosition();
+	}
 	
 	
 }
