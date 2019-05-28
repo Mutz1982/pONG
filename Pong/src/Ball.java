@@ -13,10 +13,5 @@ public class Ball extends Sprite {
 		setInitialPosition(panelWidth / 2 - (getWidth() / 2), panelHeight / 2 - (getHeight() / 2));
 		resetToInitialPosition();
 	}
-
-	private void setColour(Color ballColour) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }

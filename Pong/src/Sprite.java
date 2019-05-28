@@ -18,6 +18,10 @@ public class Sprite {
 	public int getInitialXPosition() {return initialXPosition;}
 	public int getInitialYPosition() {return initialYPosition;}
 	
+	Color setColour(Color colour) {
+		return colour;
+	}
+	
 	public void setInitialPosition(int initialX, int initialY) {
 		initialXPosition = initialX;
 		initialYPosition = initialY;
@@ -86,5 +90,6 @@ public class Sprite {
 		// TODO Auto-generated method stub
 		return BALL_COLOUR;
 	}
+	
 	
 }
